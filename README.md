@@ -4,4 +4,5 @@ This is my personal openpilot repo, geared towards my personal car and configura
 * SmartDSU
 
 Branches:
-* TBD
+* [op-long-toggle](https://github.com/jasonmoreau/openpilot/tree/op-long-toggle)
+  * Allows you to toggle openpilot ACC/longitudinal control on and off from the UI
