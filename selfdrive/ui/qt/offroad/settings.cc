@@ -35,6 +35,11 @@ TogglesPanel::TogglesPanel(QWidget *parent) : QWidget(parent) {
                                   "Use the openpilot system for adaptive cruise control and lane keep driver assistance. Your attention is required at all times to use this feature. Changing this setting takes effect when the car is powered off.",
                                   "../assets/offroad/icon_openpilot.png",
                                   this));
+  toggles.append(new ParamControl("OpenpilotLongEnabledToggle",
+                                  "Enable openpilot Longitudinal Control",
+                                  "Enable openpilot longitudinal control (if compatible). This is handy if you have a Comma Pedal and/or SmartDSU and want to toggle between stock ACC or openpilot ACC. Restart car or reboot system for this setting to take effect.",
+                                  "../assets/offroad/icon_openpilot.png",
+                                  this));
   toggles.append(new ParamControl("IsLdwEnabled",
                                   "Enable Lane Departure Warnings",
                                   "Receive alerts to steer back into the lane when your vehicle drifts over a detected lane line without a turn signal activated while driving over 31mph (50kph).",
