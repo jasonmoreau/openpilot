@@ -20,7 +20,7 @@ Changes outlined below:
                                   "../assets/offroad/icon_openpilot.png",
                                   this));
 ```
-* Added to OpenpilotLongEnabledToggle [selfdrive/common/params.cc](selfdrive/common/params.cc)
+* Added OpenpilotLongEnabledToggle to [selfdrive/common/params.cc](selfdrive/common/params.cc)
 ```c++
     {"OpenpilotLongEnabledToggle", PERSISTENT},
 ```
