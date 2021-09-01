@@ -8,6 +8,8 @@ Depending on what kind of driving I'm doing, I wanted the ability to enable or d
 
 Please note that you must either reboot the device or restart your car for this toggle to take effect. If you have any ideas on how I can get this toggle to take effect in real time, please let me know.
 
+[![](https://i.imgur.com/xm69VMB.png)](#)
+
 Changes outlined below:
 
 * Added OpenpilotLongEnabledToggle to [selfdrive/ui/qt/offroad/settings.cc](selfdrive/ui/qt/offroad/settings.cc)
