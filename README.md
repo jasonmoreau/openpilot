@@ -13,3 +13,5 @@ Branches:
   * Added cruise_offset parameter to op_edit for adjusting set cruise speed muiltiplier
 
 Check out [my YouTube channel](https://www.youtube.com/user/J4SONM/videos) to see what I'm up to with openpilot and my RAV4!
+
+Also, feel free to message me on Discord at [jasonmoreau#3991](https://discordapp.com/users/428354577960665090) if you have any questions.
