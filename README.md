@@ -5,6 +5,7 @@ This is my personal openpilot repo, geared towards my own car and configuration:
 
 Branches:
 * [op-long-toggle](https://github.com/jasonmoreau/openpilot/tree/op-long-toggle)
+  * Based on pure/stock openpilot
   * Allows you to toggle openpilot ACC/longitudinal control on and off from the UI
 * [argonaut-0.8.8](https://github.com/jasonmoreau/openpilot/tree/argonaut-0.8.8)
   * Based on Aragon's [0.8.8-shane-spektor-honda-toyota](https://github.com/Aragon7777/openpilot/tree/0.8.8-shane-spektor-honda-toyota) fork
