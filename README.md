@@ -5,8 +5,9 @@ This is my personal openpilot repo, geared towards my own car and configuration:
 
 Branches:
 * [op-long-toggle](https://github.com/jasonmoreau/openpilot/tree/op-long-toggle)
-  * Based on pure/stock openpilot
-  * Allows you to toggle openpilot ACC/longitudinal control on and off from the UI
+  * Based on pure/stock openpilot v0.8.8
+  * Allows you to toggle between stock ACC and openpilot ACC from the UI
+  * Includes [noise fix](https://github.com/commaai/openpilot/issues/21998) to prevent random disengagements for Toyotas with a Comma Pedal
 * [argonaut-0.8.8](https://github.com/jasonmoreau/openpilot/tree/argonaut-0.8.8)
   * Based on Aragon's [0.8.8-shane-spektor-honda-toyota](https://github.com/Aragon7777/openpilot/tree/0.8.8-shane-spektor-honda-toyota) fork
   * Includes toggle from [op-long-toggle](https://github.com/jasonmoreau/openpilot/tree/op-long-toggle)
