@@ -1,17 +1,17 @@
 [submodule "panda"]
 	path = panda
-	url = https://github.com/jasonmoreau/panda.git
+	url = ../../jasonmoreau/panda.git
 	branch = master
 [submodule "opendbc"]
 	path = opendbc
-	url = https://github.com/commaai/opendbc.git
+	url = ../../commaai/opendbc.git
 [submodule "laika_repo"]
 	path = laika_repo
-	url = https://github.com/commaai/laika.git
-[submodule "rednose_repo"]
-	path = rednose_repo
-	url = https://github.com/commaai/rednose.git
+	url = ../../commaai/laika.git
 [submodule "cereal"]
 	path = cereal
-	url = https://github.com/jasonmoreau/cereal.git
+	url = ../../jasonmoreau/cereal.git
 	branch = master
+[submodule "rednose_repo"]
+	path = rednose_repo
+	url = ../../commaai/rednose.git
