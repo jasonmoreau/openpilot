@@ -289,27 +289,27 @@ jobs:
 #        name: longitudinal
 #        path: selfdrive/test/longitudinal_maneuvers/out/longitudinal/
 
-  test_car_models:
-    name: car models
-    runs-on: ubuntu-20.04
-    timeout-minutes: 50
-    steps:
-    - uses: actions/checkout@v2
-      with:
-        submodules: true
-    - name: Cache dependencies
-      id: dependency-cache
-      uses: actions/cache@v2
-      with:
-        path: /tmp/comma_download_cache
-        key: ${{ hashFiles('.github/workflows/test.yaml', 'selfdrive/test/test_routes.py') }}
-    - name: Build Docker image
-      run: eval "$BUILD"
-    - name: Test car models
-      run: |
-        ${{ env.RUN }} "scons -j$(nproc) && \
-                        FILEREADER_CACHE=1 coverage run --parallel-mode -m nose --processes=4 --process-timeout=120 \
-                                           selfdrive/test/test_models.py && \
-                        coverage combine"
-    - name: Upload coverage to Codecov
-      run: bash <(curl -s https://codecov.io/bash) -v -F test_car_models
+#  test_car_models:
+#    name: car models
+#    runs-on: ubuntu-20.04
+#    timeout-minutes: 50
+#    steps:
+#    - uses: actions/checkout@v2
+#      with:
+#        submodules: true
+#    - name: Cache dependencies
+#      id: dependency-cache
+#      uses: actions/cache@v2
+#      with:
+#        path: /tmp/comma_download_cache
+#        key: ${{ hashFiles('.github/workflows/test.yaml', 'selfdrive/test/test_routes.py') }}
+#    - name: Build Docker image
+#      run: eval "$BUILD"
+#    - name: Test car models
+#      run: |
+#        ${{ env.RUN }} "scons -j$(nproc) && \
+#                        FILEREADER_CACHE=1 coverage run --parallel-mode -m nose --processes=4 --process-timeout=120 \
+#                                           selfdrive/test/test_models.py && \
+#                        coverage combine"
+#    - name: Upload coverage to Codecov
+#      run: bash <(curl -s https://codecov.io/bash) -v -F test_car_models
