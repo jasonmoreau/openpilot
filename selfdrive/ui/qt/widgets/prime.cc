@@ -125,7 +125,7 @@ PrimeUserWidget::PrimeUserWidget(QWidget* parent) : QWidget(parent) {
   thirdLayout->setMargin(0);
   thirdWidget->setContentsMargins(60, 50, 60, 50);
 
-  QLabel* thirdLabel = new QLabel("Thanks to Shane, Spektor, and many more!");
+  QLabel* thirdLabel = new QLabel("Based on Aragon's fork");
   thirdLabel->setStyleSheet("font-size: 30px; font-family: Inter SemiBold;");
   thirdLayout->addWidget(thirdLabel, 0, Qt::AlignVCenter);
 
