@@ -8,31 +8,6 @@ My personal additions so far:
 * Toggle for switching between stock ACC and openpilot ACC (device reboot or car restart required)
 [![](https://i.imgur.com/xm69VMB.png)](#)
 
-Changes outlined below:
-
-* Added OpenpilotLongEnabledToggle to [selfdrive/ui/qt/offroad/settings.cc](selfdrive/ui/qt/offroad/settings.cc)
-```c++
-  toggles.append(new ParamControl("OpenpilotLongEnabledToggle",
-                                  "Enable openpilot Longitudinal Control",
-                                  "Enable openpilot longitudinal control (if compatible). This is handy if you have a Comma Pedal and/or SmartDSU and want to toggle between stock ACC or openpilot ACC. Restart car or reboot system for this setting to take effect.",
-                                  "../assets/offroad/icon_openpilot.png",
-                                  this));
-```
-* Added OpenpilotLongEnabledToggle to [selfdrive/common/params.cc](selfdrive/common/params.cc)
-```c++
-    {"OpenpilotLongEnabledToggle", PERSISTENT},
-```
-* Incorporated toggle in [selfdrive/car/toyota/interface.py](selfdrive/car/toyota/interface.py)
-```python
-from common.params import Params
-```
-```python
-    params = Params()
-    op_long_enabled_toggle = params.get_bool("OpenpilotLongEnabledToggle")
-```
-```python
-    ret.openpilotLongitudinalControl = op_long_enabled_toggle and (smartDsu or ret.enableDsu or candidate in TSS2_CAR)
-```
 To install this fork, ssh into your comma and run the below command:
 ```
 cd /data; mv openpilot openpilot.bkp; git clone -b argonaut-0.8.8 --single-branch https://github.com/jasonmoreau/openpilot.git --depth 1 --recurse-submodules --shallow-submodules -j8
