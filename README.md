@@ -37,5 +37,5 @@ from common.params import Params
 ```
 To install this fork, ssh into your comma and run the below command:
 ```
-cd /data; mv openpilot openpilot.bkp; git clone -b op-long-toggle --single-branch https://github.com/jasonmoreau/openpilot.git --depth 1 --recurse-submodules --shallow-submodules -j8
+cd /data; mv openpilot openpilot.bkp; git clone -b combo-0.8.10 --single-branch https://github.com/jasonmoreau/openpilot.git --depth 1 --recurse-submodules --shallow-submodules -j8
 ```
