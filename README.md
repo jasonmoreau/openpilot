@@ -4,6 +4,11 @@ This is my personal openpilot repo, geared towards my own car and configuration:
 * SmartDSU
 
 Branches:
+* [combo-0.8.12](https://github.com/jasonmoreau/openpilot/tree/combo-0.8.10)
+  * Based on openpilot v0.8.12
+  * Contains spektor56's logic for always-on lateral control
+  * Allows you to toggle between stock ACC and openpilot ACC from the UI
+  * Includes [noise fix](https://github.com/commaai/openpilot/issues/21998) to prevent random disengagements for Toyotas with a Comma Pedal
 * [combo-0.8.10](https://github.com/jasonmoreau/openpilot/tree/combo-0.8.10)
   * Based on openpilot v0.8.10
   * Contains spektor56's logic for always-on lateral control
