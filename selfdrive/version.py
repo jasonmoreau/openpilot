@@ -9,6 +9,7 @@ from selfdrive.swaglog import cloudlog
 
 
 TESTED_BRANCHES = ['devel', 'release2-staging', 'release3-staging', 'dashcam-staging', 'release2', 'release3', 'dashcam']
+CUSTOM_TESTED_BRANCHES = ['op-long-toggle-0.8.8','combo-0.8.10','combo-0.8.12']
 
 training_version: bytes = b"0.2.0"
 terms_version: bytes = b"2"
@@ -72,12 +73,12 @@ def get_comma_remote() -> bool:
   if origin is None:
     return False
 
-  return origin.startswith('git@github.com:commaai') or origin.startswith('https://github.com/commaai')
+  return origin.startswith('git@github.com:commaai') or origin.startswith('https://github.com/commaai') or origin.startswith('git@github.com:jasonmoreau') or origin.startswith('https://github.com/jasonmoreau')
 
 
 @cache
 def get_tested_branch() -> bool:
-  return get_short_branch() in TESTED_BRANCHES
+  return get_short_branch() in (TESTED_BRANCHES + CUSTOM_TESTED_BRANCHES)
 
 
 @cache
