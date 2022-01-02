@@ -4,7 +4,7 @@ This is my personal openpilot repo, geared towards my own car and configuration:
 * SmartDSU
 
 Branches:
-* [combo-0.8.12](https://github.com/jasonmoreau/openpilot/tree/combo-0.8.10)
+* [combo-0.8.12](https://github.com/jasonmoreau/openpilot/tree/combo-0.8.12)
   * Based on openpilot v0.8.12
   * Contains spektor56's logic for always-on lateral control
   * Allows you to toggle between stock ACC and openpilot ACC from the UI
