@@ -14,9 +14,7 @@ from selfdrive.controls.lib.vehicle_model import VehicleModel
 GearShifter = car.CarState.GearShifter
 EventName = car.CarEvent.EventName
 
-# WARNING: this value was determined based on the model's training distribution,
-#          model predictions above this speed can be unpredictable
-MAX_CTRL_SPEED = (V_CRUISE_MAX + 4) * CV.KPH_TO_MS  # 135 + 4 = 86 mph
+MAX_CTRL_SPEED = (V_CRUISE_MAX + 4) * CV.KPH_TO_MS
 ACCEL_MAX = 2.0
 ACCEL_MIN = -3.5
 
@@ -31,16 +29,17 @@ class CarInterfaceBase():
     self.disengage_on_gas = False
 
     self.frame = 0
-    self.steer_warning = 0
-    self.gear_warning = 0
     self.steering_unpressed = 0
     self.low_speed_alert = False
+    self.silent_steer_warning = True
+    self.gear_warning = 0
 
     if CarState is not None:
       self.CS = CarState(CP)
       self.cp = self.CS.get_can_parser(CP)
       self.cp_cam = self.CS.get_cam_can_parser(CP)
       self.cp_body = self.CS.get_body_can_parser(CP)
+      self.cp_loopback = self.CS.get_loopback_can_parser(CP)
 
     self.CC = None
     if CarController is not None:
@@ -79,6 +78,7 @@ class CarInterfaceBase():
     ret.steerMaxBP = [0.]
     ret.steerMaxV = [1.]
     ret.minSteerSpeed = 0.
+    ret.wheelSpeedFactor = 1.0
 
     ret.pcmCruise = True     # openpilot's state is tied to the PCM's cruise state on most cars
     ret.minEnableSpeed = -1. # enable is done by stock ACC, so ignore this
@@ -138,23 +138,29 @@ class CarInterfaceBase():
       events.add(EventName.speedTooHigh)
     if cs_out.cruiseState.nonAdaptive:
       events.add(EventName.wrongCruiseMode)
-
+    if cs_out.brakeHoldActive and self.CP.openpilotLongitudinalControl:
+      if (cs_out.lkasEnabled):
+        cs_out.disengageByBrake = True
+      if (cs_out.cruiseState.enabled):
+        events.add(EventName.brakeHold)
+      else:
+        events.add(EventName.silentBrakeHold)
 
     self.gear_warning = self.gear_warning + 1 if cs_out.gearShifter == GearShifter.unknown else 0
-    self.steer_warning = self.steer_warning + 1 if cs_out.steerWarning else 0
-    self.steering_unpressed = 0 if cs_out.steeringPressed else self.steering_unpressed + 1
 
     # Handle permanent and temporary steering faults
+    self.steering_unpressed = 0 if cs_out.steeringPressed else self.steering_unpressed + 1
+    if cs_out.steerWarning:
+      # if the user overrode recently, show a less harsh alert
+      if self.silent_steer_warning or cs_out.standstill or self.steering_unpressed < int(1.5 / DT_CTRL):
+        self.silent_steer_warning = True
+        events.add(EventName.steerTempUnavailableSilent)
+      else:
+        events.add(EventName.steerTempUnavailable)
+    else:
+      self.silent_steer_warning = False
     if cs_out.steerError:
       events.add(EventName.steerUnavailable)
-    elif cs_out.steerWarning:
-      # only escalate to the harsher alert after the condition has
-      # persisted for 0.5s and we're certain that the user isn't overriding
-      if not cs_out.standstill and self.steering_unpressed > int(0.5 / DT_CTRL) and \
-         self.steer_warning > int(0.5 / DT_CTRL):
-        events.add(EventName.steerTempUnavailable)
-      else:
-        events.add(EventName.steerTempUnavailableSilent)
 
     # Disable on rising edge of gas or brake. Also disable on brake when speed > 0.
     # Optionally allow to press gas at zero speed to resume.
@@ -218,6 +224,16 @@ class CarStateBase:
     v_ego_x = self.v_ego_kf.update(v_ego_raw)
     return float(v_ego_x[0]), float(v_ego_x[1])
 
+  def get_wheel_speeds(self, fl, fr, rl, rr, unit=CV.KPH_TO_MS):
+    factor = unit * self.CP.wheelSpeedFactor
+
+    wheelSpeeds = car.CarState.WheelSpeeds.new_message()
+    wheelSpeeds.fl = fl * factor
+    wheelSpeeds.fr = fr * factor
+    wheelSpeeds.rl = rl * factor
+    wheelSpeeds.rr = rr * factor
+    return wheelSpeeds
+
   def update_blinker_from_lamp(self, blinker_time: int, left_blinker_lamp: bool, right_blinker_lamp: bool):
     """Update blinkers from lights. Enable output when light was seen within the last `blinker_time`
     iterations"""
@@ -264,4 +280,8 @@ class CarStateBase:
 
   @staticmethod
   def get_body_can_parser(CP):
+    return None
+
+  @staticmethod
+  def get_loopback_can_parser(CP):
     return None

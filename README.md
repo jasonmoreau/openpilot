@@ -1,4 +1,4 @@
-This is based on openpilot v0.8.10 and contains logic from spektor56's fork for always-on lateral control.
+This is based on openpilot v0.8.12 and contains logic from spektor56's fork for always-on lateral control.
 
 This will allow you to toggle openpilot ACC/longitudinal control ("OP long") on or off from the UI, if your car supports it. 
 
@@ -14,11 +14,12 @@ Changes outlined below:
 
 * Added OpenpilotLongEnabledToggle to [selfdrive/ui/qt/offroad/settings.cc](selfdrive/ui/qt/offroad/settings.cc)
 ```c++
-  addItem(new ParamControl("OpenpilotLongEnabledToggle",
-                                  "Enable openpilot Longitudinal Control",
-                                  "Enable openpilot longitudinal control (if compatible). This is handy if you have a Comma Pedal and/or SmartDSU and want to toggle between stock ACC or openpilot ACC. Restart car or reboot system for this setting to take effect.",
-                                  "../assets/offroad/icon_openpilot.png",
-                                  this));
+    {
+      "OpenpilotLongEnabledToggle",
+      "Enable openpilot",
+      "Enable openpilot longitudinal control (if compatible). This is handy if you have a Comma Pedal and/or SmartDSU and want to toggle between stock ACC or openpilot ACC. Restart car or reboot system for this setting to take effect.",
+      "../assets/offroad/icon_openpilot.png",
+    },
 ```
 * Added OpenpilotLongEnabledToggle to [selfdrive/common/params.cc](selfdrive/common/params.cc)
 ```c++
@@ -37,5 +38,5 @@ from common.params import Params
 ```
 To install this fork, ssh into your comma and run the below command:
 ```
-cd /data; mv openpilot openpilot.bkp; git clone -b combo-0.8.10 --single-branch https://github.com/jasonmoreau/openpilot.git --depth 1 --recurse-submodules --shallow-submodules -j8
+cd /data; mv openpilot openpilot.bkp; git clone -b combo-0.8.12 --single-branch https://github.com/jasonmoreau/openpilot.git --depth 1 --recurse-submodules --shallow-submodules -j8
 ```
