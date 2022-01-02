@@ -36,11 +36,11 @@ from common.params import Params
 ```python
     ret.openpilotLongitudinalControl = op_long_enabled_toggle and (smartDsu or ret.enableDsu or candidate in TSS2_CAR)
 ```
+* Added [noise fix](https://github.com/commaai/openpilot/issues/21998) to prevent random disengagements for Toyotas with a Comma Pedal [selfdrive/car/toyota/carstate.py](selfdrive/car/toyota/carstate.py)
+```python
+      ret.gasPressed = ret.gas > 30
+```
 To install this fork, ssh into your comma and run the below command:
 ```
 cd /data; mv openpilot openpilot.bkp; git clone -b combo-0.8.12 --single-branch https://github.com/jasonmoreau/openpilot.git --depth 1 --recurse-submodules --shallow-submodules -j8
-```
-* Added [noise fix](https://github.com/commaai/openpilot/issues/21998) to prevent random disengagements for Toyotas with a Comma Pedal [selfdrive/car/toyota/carstate.py](selfdrive/car/toyota/carstate.py)
-```python
-      ret.gasPressed = ret.gas > 30 # increasing from 15 to help with comma pedal noise
 ```
