@@ -1,6 +1,6 @@
 venv/
 .clang-format
-.DS_Store
+*.DS_Store
 .tags
 .ipynb_checkpoints
 .idea

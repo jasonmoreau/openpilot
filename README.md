@@ -16,7 +16,7 @@ Changes outlined below:
 ```c++
     {
       "OpenpilotLongEnabledToggle",
-      "Enable openpilot",
+      "Enable openpilot Longitudinal Control",
       "Enable openpilot longitudinal control (if compatible). This is handy if you have a Comma Pedal and/or SmartDSU and want to toggle between stock ACC or openpilot ACC. Restart car or reboot system for this setting to take effect.",
       "../assets/offroad/icon_openpilot.png",
     },
